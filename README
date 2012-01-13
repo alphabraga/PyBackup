@@ -1,0 +1,17 @@
+Esse é um script muito simples para automatizar backups de banco de dados Mysql
+Com ele é possivel realizar o backup de todos os banco de dados em seu SGBD.
+Voce altera as os parametros de conexao com o banco e o local onde deseja que seus
+arquivos sejam salvos.
+
+Você pode ainda adicionar esse script ao cron para executar seu backup regularmente. 
+
+Não sabe configurar cronjobs? Sem problema leia o artigo no nettuts : http://net.tutsplus.com/tutorials/other/scheduling-tasks-with-cron-jobs/
+
+Para executar esse script você vai precisar de: 
+
+	*unix 
+	Python(2.7 ou 2.4)
+	mysql
+	mysqldump
+
+
