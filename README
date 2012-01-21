@@ -10,8 +10,10 @@ Não sabe configurar cronjobs? Sem problema leia o artigo no nettuts : http://ne
 Para executar esse script você vai precisar de: 
 
 	*unix 
-	Python(2.7 ou 2.4)
-	mysql
+	Python(2.7 ou 2.4 não foi testado com outras versões)
+	MySQLdb
+		sudo aptitude install python-mysqldb   
+	mysql-server
 	mysqldump
 
 
