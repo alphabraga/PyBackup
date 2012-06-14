@@ -8,10 +8,10 @@ from email.Utils import COMMASPACE, formatdate
 from email import Encoders
 import os
 
-def sendMail(to, subject, text, files=[],server="localhost"):
+def sendMail(to, subject, text, files=[],server="mail.lig16.com"):
     assert type(to)==list
     assert type(files)==list
-    fro = "Expediteur <expediteur@mail.com>"
+    fro = "Expediteur <alfredo.braga@lig16.com>"
 
     msg = MIMEMultipart()
     msg['From'] = fro
@@ -29,14 +29,9 @@ def sendMail(to, subject, text, files=[],server="localhost"):
                        % os.path.basename(file))
         msg.attach(part)
 
-    smtp = smtplib.SMTP(server)
+    smtp = smtplib.SMTP(server, 587)
     smtp.sendmail(fro, to, msg.as_string() )
     smtp.close()
 
 
-sendMail(
-        ["destination@dest.kio"],
-        "hello","cheers",
-        ["photo.jpg","memo.sxw"]
-    )
-
+sendMail(["alfredorodruguesbraga@gmail.com"], "hello","cheers")
