@@ -1,5 +1,6 @@
 Esse é um script muito simples para automatizar backups de banco de dados Mysql
 Com ele é possivel realizar o backup de todos os banco de dados em seu SGBD.
+
 Voce altera as os parametros de conexao com o banco e o local onde deseja que seus
 arquivos sejam salvos.
 
@@ -7,13 +8,21 @@ Você pode ainda adicionar esse script ao cron para executar seu backup regularm
 
 Não sabe configurar cronjobs? Sem problema leia o artigo no nettuts : http://net.tutsplus.com/tutorials/other/scheduling-tasks-with-cron-jobs/
 
-Para executar esse script você vai precisar de: 
+Requerimentos
 
 	*unix 
-	Python(2.7 ou 2.4 não foi testado com outras versões)
-	MySQLdb
-		sudo aptitude install python-mysqldb   
 	mysql-server
 	mysqldump
+	Python(2.7 ou 2.4 não foi testado com outras versões)
+		Instale o python-mysqldb
+			sudo aptitude install python-mysqldb   
 
+
+Instalação
+
+	O arquivo python_backup_mysql.py precisa de permissão de execução para isso execute o comando:
+	
+	sudo chmod +x python_backup_mysql.py
+
+	Você precisa alterar o arquivo de configuração com seus dados
 

@@ -1,36 +1,46 @@
 #!/usr/bin/python
+# -*- coding: utf8  -*-
 
 ####################################################################
-#                       python_mysql_backup.py			   #
+#                       python_mysql_backup.py		        	   #
 #Realiza do backup de todos os banco de dados em seu SGBD  MYSQL   #	
-#Dependencias  mysqldump & python(2.7x e 2.4x)        		   #	
-#Licenca GPL    						   #
+#Dependencias  mysqldump & python(2.7x e 2.4x)        		       #	
+#Licenca GPL    						                           #
 ####################################################################
 
-import config # arquivo de configuracao
+import config   # arquivo de configuracao
 import MySQLdb
 import os
 import datetime
 import time
-import traceback
+import mail
 
 now	 = datetime.datetime.now() #data atual
 
 def datetime():
-	
+	""" Return the datetime to concatenate to filename """
 	t = time.localtime();	
 	timestamp = str(t.tm_mday)+'/'+str(t.tm_mon)+'/'+ str(t.tm_year)+'  '+str(t.tm_hour)+':'+str(t.tm_min)+':'+str(t.tm_sec) 
 	return timestamp
 
+def find(f, seq):
+  """Return first item in sequence where f(item) == True."""
+  for item in seq:
+    if f == item: 
+      return True
+
+  return False     
+
+      
 try:
-	db = MySQLdb.connect(config.host,config.user,config.password) #conexao com o banco
+	db = MySQLdb.connect(config.mysql_host,config.mysql_user,config.mysql_password) #conexao com o banco
 
 except:
 
 	print 'Check your config.py file....\n'
-	print 'host: '+config.host
-	print 'username: '+config.user
-	print 'password: '+config.password
+	print 'host: '+config.mysql_host
+	print 'username: '+config.mysql_user
+	print 'password: '+config.mysql_password
 	print 'path: '+config.path
 
 cursor = db.cursor() 
@@ -39,21 +49,37 @@ cursor.execute("show databases") #executo um sql para retornar todos os nomes do
 
 data = cursor.fetchall() # coloco em uma tupla
 
+
+# MEnsagem para envio de email
+email_mensagem = "O Pybackup Informa:\n\n"
+email_attach = []
 # executo um mysqldump em cada banco de dados e compacto em 'path'
 for item in data:
 
 	#tm_year=2012, tm_mon=2, tm_mday=9, tm_hour=18, tm_min=3, tm_sec=39, tm_wday=3, tm_yday=40, tm_isdst=0
 	filename = config.path+item[0]+'.'+str(now.day)+str(now.month)+str(now.year)+'.sql.gz'	
 
+	if config.attach & find(item[0], config.attach_databases):
+		email_attach.append(filename)
+
+
 	if item[0] != 'mysql' and item[0] != 'information_schema' and item[0] != 'performance_schema' : 
 	
 		timestamp = datetime()
 		print 'Iniciando o backup de '+item[0]+' em '+timestamp 	
 		
-		os.system('mysqldump --default-character-set=utf8 --add-drop-database -u'+config.user+' -p'+config.password+' --database '+item[0]+' | gzip > '+filename)
+		os.system('mysqldump --add-drop-database -u'+config.mysql_user+' -p'+config.mysql_password+' --database '+item[0]+' | gzip > '+filename)
 
 		size = os.path.getsize(filename) # tamanho do arquivo
 		size = size/1024*1024		 # tamanho em MB
 		timestamp = datetime() 
-		print 'Backup '+filename+' finalizado em '+timestamp+'. Tamanho do arquivo: '+str(size)+' MB' 
 		
+		mensagem = 'Backup '+filename+' finalizado em '+timestamp+'. Tamanho do arquivo: '+str(size)+' MB' 
+
+		print mensagem
+
+		email_mensagem += mensagem+ "\n"
+
+# Send email to inform
+if config.use_mail:
+	mail.send(email_mensagem, email_attach)
