@@ -29,12 +29,8 @@ Requerimentos
 Instalação
 ************
 
-	O arquivo python_backup_mysql.py precisa de permissão de execução para isso execute o comando:
+Você precisa alterar o arquivo de configuração com seus dados
 
-	sudo chmod +x python_backup_mysql.py
+O arquivo python_backup_mysql.py precisa de permissão de execução para isso execute o comando:
 
-	Você precisa alterar o arquivo de configuração com seus dados
-
-	O arquivo python_backup_mysql.py precisa de permissão de execução para isso execute o comando:
-	
-	`sudo chmod +x python_backup_mysql.py`
+`sudo chmod +x python_backup_mysql.py`
