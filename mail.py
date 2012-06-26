@@ -49,7 +49,7 @@ def send(text, files):
 
     except:
         
-        print 'Check your config.py file....\n'
+        print 'Send email error. Check your config.py file....\n'
         print 'smtp host: '+config.smtp_host
         print 'user: '+config.smtp_user
         print 'password: '+config.smtp_password

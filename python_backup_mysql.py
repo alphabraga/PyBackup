@@ -17,6 +17,10 @@ import mail
 
 now	 = datetime.datetime.now() #data atual
 
+dt = now.strftime(config.date_format)
+
+time.strftime('%m/%d/%Y',time.strptime('12/1/2009', '%m/%d/%Y'))
+
 def datetime():
 	""" Return the datetime to concatenate to filename """
 	t = time.localtime();	
@@ -37,7 +41,7 @@ try:
 
 except:
 
-	print 'Check your config.py file....\n'
+	print 'Database connection error. Check your config.py file....\n'
 	print 'host: '+config.mysql_host
 	print 'username: '+config.mysql_user
 	print 'password: '+config.mysql_password
@@ -50,14 +54,14 @@ cursor.execute("show databases") #executo um sql para retornar todos os nomes do
 data = cursor.fetchall() # coloco em uma tupla
 
 
-# MEnsagem para envio de email
+# Mensagem para envio de email
 email_mensagem = "O Pybackup Informa:\n\n"
 email_attach = []
 # executo um mysqldump em cada banco de dados e compacto em 'path'
 for item in data:
 
 	#tm_year=2012, tm_mon=2, tm_mday=9, tm_hour=18, tm_min=3, tm_sec=39, tm_wday=3, tm_yday=40, tm_isdst=0
-	filename = config.path+item[0]+'.'+str(now.day)+str(now.month)+str(now.year)+'.sql.gz'	
+	filename = config.path+item[0]+'.'+dt+'.sql.gz'	
 
 	if config.attach & find(item[0], config.attach_databases):
 		email_attach.append(filename)
