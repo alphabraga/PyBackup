@@ -4,6 +4,8 @@
 # Configuration file of Pybackup
 
 # Main confguration
+
+date_format      = '%Y-%m-%d'    
 path             = '/home/alphabraga/pybackup/'           # Pasta onde se deseja salvar os backups dos bancos de dados
 use_mail         = False                            # You want to send email? 
 attach           = False                            # you want to attach the backup files in email?  
