@@ -2,10 +2,10 @@
 # -*- coding: utf8  -*-
 
 ####################################################################
-#                       python_mysql_backup.py		        	   #
+#                       python_mysql_backup.py		     	   #
 #Realiza do backup de todos os banco de dados em seu SGBD  MYSQL   #	
-#Dependencias  mysqldump & python(2.7x e 2.4x)        		       #	
-#Licenca GPL    						                           #
+#Dependencias  mysqldump & python(2.7x e 2.4x)        	           #	
+#Licenca GPL    						   #
 ####################################################################
 
 import config   # arquivo de configuracao

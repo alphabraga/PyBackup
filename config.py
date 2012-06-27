@@ -20,7 +20,7 @@ mysql_password   = 'your-password'                        # senha para acesso ao
 
 # Email Config
 
-smpt_host        = ''                                     # smtp server ip or domain 'smtp.gmail.com'
+smtp_host        = ''                                     # smtp server ip or domain 'smtp.gmail.com'
 smtp_port        =  587                                   # smtp port 587
 smtp_user        = ''                                     # smtp  user email 'alfredorodruguesbraga@gmail.com'
 smtp_password    = 'your-password'                        # smtp password 

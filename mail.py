@@ -37,7 +37,7 @@ def send(text, files):
                        % os.path.basename(file))
         msg.attach(part)
 
-    smtp = smtplib.SMTP(config.smpt_host, config.smtp_port)
+    smtp = smtplib.SMTP(config.smtp_host, config.smtp_port)
 
     try:
         smtp.ehlo()
