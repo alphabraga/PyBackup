@@ -28,5 +28,7 @@ smtp_to          = []                                     # send emails to ['ema
 
 
 name             = 'John Doe'                                                                 # email FROM name
-subject          = 'Backup by Pybackup'                                                       # email title
+subject          = 'Backup by Pybackup'                                                       # email subject
 menssage_footer  = 'Made with PyBackup. More info on https://github.com/alphabraga/PyBackup'  # email footer text
+
+#config end file ./config.py
