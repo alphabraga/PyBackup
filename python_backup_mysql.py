@@ -80,3 +80,7 @@ for item in data:
 # Send email to inform
 if config.use_mail:
 	mail.send(email_mensagem, email_attach)
+
+if config.use_rsync:
+	print 'Iniciando sincronização via Rsync'
+	os.system('rsync -avz --progress '+config.path+' '+config.remote_user+'@'+config.remote_host+':'+config.remote_path)
